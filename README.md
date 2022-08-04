@@ -41,3 +41,8 @@ create a package capable of producing quality Exploratory Data Analysis. The pot
 challenges we face are making the package generic enough to be applicable to all
 tabular datasets, identifying the correct methods of engineering the data, and ensuring
 that the summary is coherent and useful.
+
+## Creators
+Sadasivam Natanakumar
+Prerna Chander
+Saurav Krishna
