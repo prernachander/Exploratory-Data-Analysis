@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 """
 Created on Sat Aug  6 00:37:01 2022
 
@@ -68,17 +67,15 @@ class data:
             
     def data_engineering(self):
         """
-        The data_engineering function is designed to work on the dataframe to One Hot Encode the data which allows
-        categorical data to be converted to a series of 0s and 1s by adding labeled columns to the table.
-        This increases the dimensionality but also allows more data to be used for analysis.
-        param df: A pandas dataframe
-        returns: Updated One Hot encoded df with outliers removed as per 3 sigma rule
+        The data_engineering function is designed to work on the dataframe to apply the 3 sigma rule for outlier removal.
+        The 3 sigma rule is a statistical calculation which states that all data that lies outside 3 standard
+        deviations from the mean is a statistical outlier and may be removed to improve the analysis on the dataset.
+        returns: Updated df with outliers removed as per 3 sigma rule
         """
-        df = self.dataset
-
-        # One Hot Encoding
-        df = pd.get_dummies(df)
-        # Applying 3 sigma rule to remove outliers
-        # df[(np.abs(stats.zscore(df)) < 3).all(axis=1)]
+        df = self.dataset        
+        # Selecting only numerical features for analysis
+        num_cols = list(df.select_dtypes(['int64' , 'float64'])) 
+        for col in num_cols:
+            df[(np.abs(stats.zscore(df[col])) < 3)] # Applying 3 sigma rule to remove outliers
         
         return df

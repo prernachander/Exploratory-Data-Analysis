@@ -81,3 +81,4 @@ class stats:
         else:
             q1 = self.median(x[0:mid_index+1])                                     #If false, q1 = median of smallest n+1 numbers
         return q1, q3                                                         #Return result of q1, q3
+

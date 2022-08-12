@@ -115,6 +115,3 @@ class viz:
           # Call the five_number_summary function
 # select_options(five_num_df,data)       # Call the select options function                  
     
-    
-    
-    
