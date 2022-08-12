@@ -11,17 +11,17 @@ class viz:
     def __init__(self, data=default):
         self.data = st.stats(data)
 
-    def plots(self,f1,f2,f3,f8,five_num_df,data):
+    def plots(self,f1,f2,f3,f8,data_summary_df,data):
         """
         Creates various kinds of plots 
         1. A pie chart to show the train-test split
-        2. A table showcasing the five number summary for each feature
+        2. A table showcasing the data summary for each numerical feature
         3. A histogram plot using a feature of the user's choice
         4. A 2-D scatter plot using two features of the user's choice
         5. A pair plot containing all the features
         param f1,f2 : Two features for a 2-D scatter plot
               f3 : One feature for a histogram plot
-              five_num_df: A DataFrame with the five number summary of the dataset
+              data_summary_df: A DataFrame with the summary of the dataset
               file_name : CSV dataset
         returns : None
         """
@@ -34,8 +34,8 @@ class viz:
         axs[0][0].pie([len(train),len(test)],labels=pie_labels,autopct='%.0f%%') # Plot a pie chart
     
         axs[0][1].axis('off')
-        axs[0][1].set_title("Five Number Summary")     # Set heading for subplot 2
-        table=axs[0][1].table(cellText=five_num_df.values, colLabels=five_num_df.columns, loc='upper center') # Showcase a table containing five number sum
+        axs[0][1].set_title("Numerical Data Summary")     # Set heading for subplot 2
+        table=axs[0][1].table(cellText=data_summary_df.values, colLabels=data_summary_df.columns, loc='upper center') # Showcase a table containing data summary
         table.auto_set_font_size(False)
         table.set_fontsize(6)                      # Set font size and scale
         table.scale(1, 2)
@@ -60,11 +60,11 @@ class viz:
         """
         options_dict={}                         # Assign an empty dictionary
         df=self.data.data
-        five_num_df = self.data.five_number_summary(df)
+        data_summary_df = self.data.data_summary(df)
     
         for i in range(len(df.columns)):  
             options_dict[i+1]=df.columns[i]     # Fill up the dictonary with columns from the dataframe that can be used as features
-    
+   
         select_df = pd.DataFrame(options_dict.items(), columns=["Option","Feature"])  # Create a dataframe to display options to select for plots
     
         print(select_df.to_string(index=False))                                       # Display the options to be selected
@@ -111,7 +111,7 @@ class viz:
         # temp = []
         # for i in pair_list:
         #     temp.append(df[i].values)
-        self.plots(f1,f2,f3,f8,five_num_df,df)  # Call the plots function
-          # Call the five_number_summary function
-# select_options(five_num_df,data)       # Call the select options function                  
+        self.plots(f1,f2,f3,f8,data_summary_df,df)  # Call the plots function
+          # Call the data_summary function
+# select_options(data_summary_df,data)       # Call the select options function                  
     
