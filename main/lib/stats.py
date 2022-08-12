@@ -23,14 +23,14 @@ class stats:
         df = self.data
         random_generator = RandomState()
         train = df.sample(frac = 0.7, random_state = random_generator) #70-30 split
-        test = df.loc[~ df.index.isin(train.index)] #selecting all rows that are not in train
+        test = df.loc[~ df.index.isin(train.index)]                    #Selecting all rows that are not in train
         return train, test
     
-    def five_number_summary(self, data):
+    def data_summary(self, data):
         """
-        Calculates the five number summary of a dataset (the minimum, Q1, the median, Q3, maximum)
+        Calculates the statistical summary of a dataset (the minimum, Q1, the median, Q3, maximum, mean, mode)
         param data: CSV dataset
-        returns: A DataFrame with the five number summary of the dataset
+        returns: A DataFrame with the statistical summary of the numerical values of the dataset
         """
         result = []
         df = data
@@ -45,9 +45,13 @@ class stats:
             maximum_val = sorted_list[-1]
             ##QUARTILES##
             q1_val, q3_val = self.calc_quartiles(sorted_list)
-            result.append([col, minimum_val, q1_val, median_val, q3_val, maximum_val])
-        five_num_df = pd.DataFrame(result, columns=['feature', 'minimum', 'q1', 'median', 'q3', 'maximum'])
-        return five_num_df
+            ##MEAN##
+            mean_val = mean(sorted_list)
+            ##MODE##
+            mode_val = max(set(sorted_list), key=sorted_list.count)
+            result.append([col, minimum_val, q1_val, median_val, q3_val, maximum_val, mean_val, mode_val])
+        data_summary_df = pd.DataFrame(result, columns=['feature', 'minimum', 'q1', 'median', 'q3', 'maximum', 'mean', 'mode'])
+        return data_summary_df
     
     def median(self, x):
         """
@@ -56,13 +60,13 @@ class stats:
         param x: A sorted list of numbers
         returns: A median value of the elements of the iterable
         """
-        if len(x)%2==0:                                                #Condition to check if the length of x_sorted is even
+        if len(x)%2==0:                                                #Condition to check if the length of x is even
             mid_up_index = len(x)//2
             mid_down_index = len(x)//2 - 1
-            median_val = (x[mid_down_index]+x[mid_up_index])/2      #If true, calculate the median as the average of the two middle most values of x_sorted
+            median_val = (x[mid_down_index]+x[mid_up_index])/2         #If true, calculate the median as the average of the two middle most values of x
         else:
             mid_index = len(x)//2
-            median_val = x[mid_index]                                      #If false, calculate the median as the middle most value of x_sorted
+            median_val = x[mid_index]                                  #If false, calculate the median as the middle most value of x
         return median_val
     
     def calc_quartiles(self, x):
@@ -75,9 +79,9 @@ class stats:
         """
         
         mid_index = len(x)//2                                                 #Finding midpoint of x
-        q3 = self.median(x[mid_index:])                                            #Setting q3 = median of largest numbers
+        q3 = self.median(x[mid_index:])                                       #Setting q3 = median of largest numbers
         if len(x)%2==0:                                                       #Condition to check if the length of x is even
-            q1 = self.median(x[0:mid_index])                                       #If true, q1 = median of smallest n numbers
+            q1 = self.median(x[0:mid_index])                                  #If true, q1 = median of smallest n numbers
         else:
-            q1 = self.median(x[0:mid_index+1])                                     #If false, q1 = median of smallest n+1 numbers
+            q1 = self.median(x[0:mid_index+1])                                #If false, q1 = median of smallest n+1 numbers
         return q1, q3                                                         #Return result of q1, q3
