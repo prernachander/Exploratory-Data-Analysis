@@ -2,6 +2,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
 import lib.stats as st
+import numpy as np
 
 default = 'data/iris.csv'
 
@@ -50,7 +51,14 @@ class viz:
     
         g=sns.pairplot(data=self.data.data, hue=f8);                        # Plot a pairplot
         g.fig.suptitle("Pair Plots")                                   # Set heading for the pairplot
-        plt.show()   
+        plt.show(block=False) 
+
+        fig, axs = plt.subplots(figsize=(8,6))                         # Plot a correlation matrix
+        corr = df.corr()
+        sns.heatmap(corr, mask=np.zeros_like(corr, dtype=np.bool), cmap=sns.diverging_palette(220, 10, as_cmap=True),
+                    square=True, ax=axs)                               # Set parameters for the correlation heatmap
+        axs.set_title("Correlation matrix")
+        plt.show() 
          
     def select_options(self,data):
         """
