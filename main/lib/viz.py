@@ -79,7 +79,7 @@ class viz:
         success=False
         while success is not True:
             try:                                    
-                f1,f2=input("Select two different options as features for a 2-D scatter plot: ").split()  # Ask the user to select two features for a 2-D scatter plot
+                f1,f2=input("Select two different options as features for a 2-D scatter plot: \n").split()  # Ask the user to select two features for a 2-D scatter plot
                 f1=options_dict[int(f1)]    # Convert the dictonary's keys into integers
                 f2=options_dict[int(f2)]
                 if f1 !=f2:
@@ -103,7 +103,7 @@ class viz:
                 print("Wrong choice, please try again")# Display the options to be selected
                 print(select_df.to_string(index=False))
             except ValueError:
-                print("Incorrect number of choices, please select one option as a feature for a Histogram: ")
+                print("Incorrect number of choices, please select one option as a feature for a Histogram: \n")
                 print(select_df.to_string(index=False))
         
         select_df = select_df[select_df.Feature != f1]
@@ -113,7 +113,7 @@ class viz:
         success=False
         while success is not True:
             try:                                    
-                f4=input("Select a label for color encoding the plots that is different from the Histogram feature and 2D Scatter plots: ")                # Ask the user to select one feature for a histogram
+                f4=input("Select a label for color encoding the plots that is different from the Histogram feature and 2D Scatter plots: \n")                # Ask the user to select one feature for a histogram
                 f4=options_dict[int(f4)]    # Convert the dictonary's keys into an integer
                 
                 if f4!=f1 and f4!=f2 and f4!=f3:
@@ -124,10 +124,6 @@ class viz:
             except ValueError:
                 print("Incorrect number of choices, please select one option as a label for color encoding the plots that is different from the Histogram feature: ")
                 print(select_df.to_string(index=False))
-        # temp = []
-        # for i in pair_list:
-        #     temp.append(df[i].values)
+                
         self.plots(f1,f2,f3,f4,data_summary_df,df)  # Call the plots function
-          # Call the data_summary function
-# select_options(data_summary_df,data)       # Call the select options function                  
     

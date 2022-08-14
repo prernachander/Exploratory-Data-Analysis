@@ -1,7 +1,6 @@
 import pandas as pd
 import lib.FeatureEngineering as fe
 from numpy.random import RandomState
-import unittest
 
 default = 'data/iris.csv'
 
