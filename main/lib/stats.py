@@ -99,48 +99,6 @@ class stats:
             xsum = xsum + elem
             count = count + 1
         xmean = xsum/count
-        return xmean
-
-## Adding unit tests ##
-
-class test_stats(unittest.TestCase):
-    def test_split_train_test(self):
-        """
-        Testing split_train_test() function by matching the number of rows of the train & test DataFrames
-        (70/30 split)
-        """
-        x = stats('data/iris.csv')
-        out_train, out_test = x.split_train_test()
-        self.assertEqual(len(out_train), 105)
-        self.assertEqual(len(out_test), 45)
-
-    def test_median(self):
-        """
-        Testing median() function by checking the output of some numerical lists
-        """
-        out = stats().median([2, 2, 4, 6, 8])
-        self.assertEqual(out, 4)
-        out2 = stats().median([1, 7, 3, 5, 3, 9])
-        self.assertEqual(out2, 4)
-        out3 = stats().median([1, 2, 1, 3, 4, 2])
-        self.assertEqual(out3, 2)
-    def test_mean(self):
-        """
-        Testing mean() function by checking the output of some numerical lists
-        """
-        out = stats().mean([2, 2, 4, 6, 8])
-        self.assertEqual(out, 4.4)
-        out2 = stats().mean([1, 3, 3, 5, 7, 8])
-        self.assertEqual(out2, 4.5)
-        out3 = stats().mean([1, 1, 2, 2, 3, 9])
-        self.assertEqual(out3, 3)
-    def test_calc_quartiles(self):
-        """
-        Testing calc_quartiles() function by checking the output of some numerical lists
-        """
-        out_q1, out_q3 = stats().calc_quartiles([20, 30, 50, 60, 70, 90])
-        self.assertEqual(out_q1, 30)
-        self.assertEqual(out_q3, 70)
-        out2_q1, out2_q3 = stats().calc_quartiles([1, 5, 6, 7, 8, 9, 10])
-        self.assertEqual(out2_q1, 5.5)
-        self.assertEqual(out2_q3, 8.5)
+        str_format = "{:.2f}".format(xmean)                                  #Formatting value to limit to 2 decimal places (string)
+        float_value = float(str_format)                                      #Converting the string back to float
+        return float_value
