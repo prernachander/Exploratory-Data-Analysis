@@ -19,8 +19,10 @@ The user is prompted to provide three sets of inputs:
 3. Color Encoding the Plot: Requires one feature. It needs to be different from the ones used in both the plots above.
 
 ## Testing:
-Execute 'test.py' which contains the unittest functions.
-
+Execute 'test.py' which contains the unittest functions. Dataframe related functions have fail-case scenarios created for them, whereas the statistical functions have their respective equal-case scenarios. For the Visualization function, exception handling has been care of and users can use any set of combinations to test the same.
+1. For example, for testing the 2-D scatter plot exception sequence, you may input 1 or 1 1 or 1 2 3 or a set with an out of bound option such as 1 8 for the test data. To continue execution, you may enter 1 2
+2. For the Histogram exception sequence, you may input 1 2 or an out of bound option such as 8 for the test data. To continue execution, you may enter 3
+3. For the Encoding label exception sequence, you may input an option that has already been used to continue the execution above or an out of bound option such as 8 To continue execution, you may enter 5
 ## Creators:
 1. Sadasivam Natanakumar
 2. Prerna Chander
