@@ -74,8 +74,11 @@ class data:
         """
         df = self.dataset        
         # Selecting only numerical features for analysis
-        num_cols = list(df.select_dtypes(['int64' , 'float64'])) 
-        for col in num_cols:
-            df[(np.abs(stats.zscore(df[col])) < 3)] # Applying 3 sigma rule to remove outliers
-        
-        return df
+        if isinstance(df, pd.DataFrame):
+            num_cols = list(df.select_dtypes(['int64' , 'float64'])) 
+            for col in num_cols:
+                df[(np.abs(stats.zscore(df[col])) < 3)] # Applying 3 sigma rule to remove outliers
+            
+            return df
+        else:
+            raise ValueError('[Unknown File Type] Expected pandas DataFrame')

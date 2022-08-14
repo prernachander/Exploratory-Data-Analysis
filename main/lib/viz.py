@@ -12,7 +12,7 @@ class viz:
     def __init__(self, data=default):
         self.data = st.stats(data)
 
-    def plots(self,f1,f2,f3,f8,data_summary_df,data):
+    def plots(self,f1,f2,f3,f4,data_summary_df,data):
         """
         Creates various kinds of plots 
         1. A pie chart to show the train-test split
@@ -41,15 +41,15 @@ class viz:
         table.set_fontsize(6)                      # Set font size and scale
         table.scale(1, 2)
     
-        sns.histplot(ax=axs[1][0],data=df,x=f3,hue=f8,kde=True) # PLot a histogram
+        sns.histplot(ax=axs[1][0],data=df,x=f3,hue=f4,kde=True) # PLot a histogram
         axs[1][0].set_title("Histogram")                               # Set heading for subplot 3
     
-        sns.scatterplot(ax=axs[1][1],data=df,x=f1,y=f2,hue=f8); # Plot a 2-D scatter plot
+        sns.scatterplot(ax=axs[1][1],data=df,x=f1,y=f2,hue=f4); # Plot a 2-D scatter plot
         axs[1][1].set_title("2-D Scatter Plot");                       # Set heading for subplot 4
     
         plt.show(block=False)                                          # Show the whole plot
     
-        g=sns.pairplot(data=self.data.data, hue=f8);                        # Plot a pairplot
+        g=sns.pairplot(data=self.data.data, hue=f4);                        # Plot a pairplot
         g.fig.suptitle("Pair Plots")                                   # Set heading for the pairplot
         plt.show(block=False) 
 
@@ -79,17 +79,18 @@ class viz:
         success=False
         while success is not True:
             try:                                    
-                f1,f2=input("Select two options as features for a 2-D scatter plot: ").split()  # Ask the user to select two features for a 2-D scatter plot
+                f1,f2=input("Select two different options as features for a 2-D scatter plot: ").split()  # Ask the user to select two features for a 2-D scatter plot
                 f1=options_dict[int(f1)]    # Convert the dictonary's keys into integers
                 f2=options_dict[int(f2)]
-                success=True
+                if f1 !=f2:
+                    success=True
             except KeyError:                # Validate the entered choices
                 print("Wrong choice, please try again")  
                 print(select_df.to_string(index=False))
             except ValueError:
-                print("Please enter two choices")
+                print("Incorrect number of choices, please enter two different choices")
                 print(select_df.to_string(index=False))
-    
+            
         print(select_df.to_string(index=False))  # Display the options to be selected
         success=False
         while success is not True:
@@ -100,26 +101,33 @@ class viz:
                 success=True
             except KeyError:                # Validate the entered choice
                 print("Wrong choice, please try again")# Display the options to be selected
-                df.to_string(index=False)
+                print(select_df.to_string(index=False))
+            except ValueError:
+                print("Incorrect number of choices, please select one option as a feature for a Histogram: ")
+                print(select_df.to_string(index=False))
+        
+        select_df = select_df[select_df.Feature != f1]
+        select_df = select_df[select_df.Feature != f2]
+        select_df = select_df[select_df.Feature != f3]
         print(select_df.to_string(index=False))  # Display the options to be selected
         success=False
         while success is not True:
             try:                                    
-                f8=input("Select a variable for color encoding for all: ")                # Ask the user to select one feature for a histogram
-                # f4=options_dict[int(f4)]    # Convert the dictonary's keys into an integer
-                # f5=options_dict[int(f5)]
-                # f6=options_dict[int(f6)]
-                # f7=options_dict[int(f7)]
-                f8=options_dict[int(f8)]
-                # pair_list = [f4,f5,f6,f7]
-                success=True
+                f4=input("Select a label for color encoding the plots that is different from the Histogram feature and 2D Scatter plots: ")                # Ask the user to select one feature for a histogram
+                f4=options_dict[int(f4)]    # Convert the dictonary's keys into an integer
+                
+                if f4!=f1 and f4!=f2 and f4!=f3:
+                    success=True
             except KeyError:                # Validate the entered choice
                 print("Wrong choice, please try again")# Display the options to be selected
-                df.to_string(index=False)
+                print(select_df.to_string(index=False))
+            except ValueError:
+                print("Incorrect number of choices, please select one option as a label for color encoding the plots that is different from the Histogram feature: ")
+                print(select_df.to_string(index=False))
         # temp = []
         # for i in pair_list:
         #     temp.append(df[i].values)
-        self.plots(f1,f2,f3,f8,data_summary_df,df)  # Call the plots function
+        self.plots(f1,f2,f3,f4,data_summary_df,df)  # Call the plots function
           # Call the data_summary function
 # select_options(data_summary_df,data)       # Call the select options function                  
     
