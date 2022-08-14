@@ -13,11 +13,15 @@ The package consists of 4 classes, namely,
 
 ## Usage:
 Execute 'ProjectMain.py' which initializes the EDA class.
+The user is prompted to provide three sets of inputs:
+1. 2D Scatter Plot: Requires two features to plot against each other.
+2. Histogram Plot: Requires one feature. This particular feature can be one of the same features selected for the 2D scatter plot.
+3. Color Encoding the Plot: Requires one feature. It needs to be different from the ones used in both the plots above.
 
 ## Testing:
 Execute 'test.py' which contains the unittest functions.
 
 ## Creators:
-Sadasivam Natanakumar
-Prerna Chander
-Saurav Krishna
+1. Sadasivam Natanakumar
+2. Prerna Chander
+3. Saurav Krishna
