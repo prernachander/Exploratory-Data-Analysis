@@ -23,6 +23,15 @@ Execute 'test.py' which contains the unittest functions. Dataframe related funct
 1. For example, for testing the 2-D scatter plot exception sequence, you may input 1 or 1 1 or 1 2 3 or a set with an out of bound option such as 1 8 for the test data. To continue execution, you may enter 1 2
 2. For the Histogram exception sequence, you may input 1 2 or an out of bound option such as 8 for the test data. To continue execution, you may enter 3
 3. For the Encoding label exception sequence, you may input an option that has already been used to continue the execution above or an out of bound option such as 8 To continue execution, you may enter 5
+
+## Requirements:
+This package requires Python 3.10 or greater to run and uses the following external packages for its implementation:
+1. Pandas
+2. Scipy
+3. Numpy
+4. Matplotlib
+5. Seaborn
+
 ## Creators:
 1. Sadasivam Natanakumar
 2. Prerna Chander
